@@ -23,7 +23,9 @@ export default function parseTrack(
 			regex,
 			(_, id: string) => names[parseInt(id)].value
 		),
-		album: parseTrackRelease(releases[track.releaseId], labels),
+		...(releases[track.releaseId]
+			? { album: parseTrackRelease(releases[track.releaseId], labels) }
+			: {}),
 		position: track.position,
 	};
 }
